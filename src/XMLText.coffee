@@ -12,7 +12,7 @@ module.exports = class XMLText extends XMLCharacterData
     super parent
 
     if not text?
-      throw new Error "Missing element text. " + @debugInfo()
+      text = ''
 
     @name = "#text"
     @type = NodeType.Text
@@ -23,7 +23,7 @@ module.exports = class XMLText extends XMLCharacterData
   Object.defineProperty @::, 'isElementContentWhitespace',
     get: () ->
       throw new Error "This DOM method is not implemented." + @debugInfo()
-  Object.defineProperty @::, 'wholeText', 
+  Object.defineProperty @::, 'wholeText',
     get: () ->
       str = ''
 
@@ -31,14 +31,14 @@ module.exports = class XMLText extends XMLCharacterData
       while prev
         str = prev.data + str
         prev = prev.previousSibling
-        
+
       str += @data
 
       next = @nextSibling
       while next
         str = str + next.data
         next = next.nextSibling
-    
+
       return str
 
 
